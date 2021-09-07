@@ -129,7 +129,9 @@
           <!-- 新闻内容 -->
           <div class="news-content">
             <!-- 左边的轮播图 -->
-            <div></div>
+            <div>
+              
+            </div>
             <!-- 右边的新闻详情 -->
             <div></div>
           </div>
@@ -388,10 +390,16 @@ export default {
         display: flex;
         // 交叉轴基线对齐
         align-items: baseline;
-        .h1{
+        h1{
           font-size: 18px;
           color: #333333;
           font-weight: bold;
+          margin-right: 10px;
+        }
+        p{
+          font-size: 14px;
+          color: #808080;
+          font-style: italic;
         }
       }
       .right{
@@ -401,6 +409,7 @@ export default {
         bottom: 15px;
       }
     }
+
   }
 
   
