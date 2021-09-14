@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
+import Register from '../views/Register.vue'
 import Dropdown from '../views/demo/Dropdown.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
   {
     path: '/dropdown',
     name: 'Dropdown',
