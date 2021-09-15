@@ -104,21 +104,24 @@ export default {
         if (valid) {
           alert("submit!");
           // 发送post请求，执行注册
-          this.axios.post('/register',`username=${this.username}&password=${this.pass}`).then(result=>{
+          console.log(this.ruleForm);
+          this.axios.post('/register',`username=${this.ruleForm.username}&password=${this.ruleForm.pass}`).then(result=>{
             console.log(result);
             if(result.data.code==200){ // 注册成功
-              this.$toast({
-                message: '注册成功',
-                position: 'bottom',
-                duration: 3000
-              })
+              alert('注册成功！');
+              // this.$toast({
+              //   message: '注册成功',
+              //   position: 'bottom',
+              //   duration: 3000
+              // })
               this.$router.push('/login');
             }else if(result.data.code==201){ // 用户已存在
-              this.$toast({
-                message: '注册失败，用户已存在',
-                position: 'bottom',
-                duration: 3000
-              })
+              alert('啊哦！注册失败，您输入的用户名已存在');
+              // this.$toast({
+              //   message: '注册失败，用户已存在',
+              //   position: 'bottom',
+              //   duration: 3000
+              // })
             }
           })
         } else {
