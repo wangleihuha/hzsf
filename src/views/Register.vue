@@ -50,18 +50,22 @@
 <script>
 export default {
   data() {
+    // 验证用户名
     var checkName = (rule, value, callback) => {
-      let reg = /^\w{6,15}$/;
+      let reg = /^[a-zA-Z0-9_\u4e00-\u9fa5]{2,10}$/;
       if (!value) {
         return callback(new Error("用户名不能为空"));
       }else if(!reg.test(value)){
-        return callback(new Error("用户名需为6至15为字符串"));
+        return callback(new Error("用户名需为2至10位字符串，可包含中英文、数字或下划线"));
       }else{
+        // 若验证通过，调用回调函数
         callback();
       }
       
     };
+    // 验证密码
     var validatePass = (rule, value, callback) => {
+      let reg = /^\d{6}$/;
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
@@ -71,6 +75,7 @@ export default {
         callback();
       }
     };
+    // 验证确认密码
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
@@ -98,8 +103,23 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("submit!");
+          // 发送post请求，执行注册
           this.axios.post('/register',`username=${this.username}&password=${this.pass}`).then(result=>{
             console.log(result);
+            if(result.data.code==200){ // 注册成功
+              this.$toast({
+                message: '注册成功',
+                position: 'bottom',
+                duration: 3000
+              })
+              this.$router.push('/login');
+            }else if(result.data.code==201){ // 用户已存在
+              this.$toast({
+                message: '注册失败，用户已存在',
+                position: 'bottom',
+                duration: 3000
+              })
+            }
           })
         } else {
           console.log("error submit!!");
