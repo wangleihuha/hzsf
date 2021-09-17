@@ -102,7 +102,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          // alert("submit!");
           // 发送post请求，执行注册
           console.log(this.ruleForm);
           this.axios.post('/register',`username=${this.ruleForm.username}&password=${this.ruleForm.pass}`).then(result=>{
